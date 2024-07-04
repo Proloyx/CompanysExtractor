@@ -15,8 +15,8 @@ class Program
         Stopwatch time = new Stopwatch();
         time.Start();
         
-        string folderPath = @"companyfacts"; // Reemplaza con la ruta a tu carpeta
-        string outputFile = @"company.json";
+        string folderPath = @"companyfacts";
+        string outputFile = @"companys.json";
 
         await ExtractDataAndSaveToJsonAsync(folderPath, outputFile);
         
@@ -27,7 +27,7 @@ class Program
 
     static async Task ExtractDataAndSaveToJsonAsync(string folderPath, string outputFile)
     {
-        using StreamWriter streamWriter = new StreamWriter(outputFile); // Abre un StreamWriter para escribir en el archivo
+        using StreamWriter streamWriter = new StreamWriter(outputFile);
         
         string[] filePaths = Directory.GetFiles(folderPath, "*.json");
         await streamWriter.WriteLineAsync("[");
@@ -45,14 +45,12 @@ class Program
 
                 if (!string.IsNullOrEmpty(cik) && !string.IsNullOrEmpty(entityName))
                 {
-                    // Crear un objeto anónimo con los datos requeridos
                     var dataItem = new
                     {
                         cik,
-                        entityName = entityName // Renombrar según la convención de C# para evitar espacios
+                        entityName = entityName 
                     };
 
-                    // Serializar el objeto anónimo directamente al archivo
                     string jsonLine = JsonConvert.SerializeObject(dataItem) + ",";
                     await streamWriter.WriteLineAsync(jsonLine);
                     Console.WriteLine(num);
