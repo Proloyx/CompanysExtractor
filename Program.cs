@@ -40,7 +40,7 @@ class Program
                 string jsonContent = await File.ReadAllTextAsync(filePath);
                 JObject jsonData = JObject.Parse(jsonContent);
 
-                string cik = filePath.Substring(14,13);
+                string cik = filePath.Substring(13,13);
                 string entityName = jsonData["entityName"]?.ToString();
 
                 if (!string.IsNullOrEmpty(cik) && !string.IsNullOrEmpty(entityName))
